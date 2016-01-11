@@ -1,0 +1,17 @@
+{
+  "name": "simple-fetch",
+  "version": "1.0.0",
+  "description": "Simple and minimal wrapper around fetch API for JSON requests",
+  "main": "index.js",
+  "repository": "tnguyen14/simple-fetch",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["fetch"],
+  "author": "Tri Nguyen <tri@tridnguyen.com>",
+  "license": "ISC",
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+    "isomorphic-fetch": "^2.2.0"
+  }
+}
