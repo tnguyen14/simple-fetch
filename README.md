@@ -3,7 +3,7 @@
 
 This is only meant for more convenient basic JSON requests. Please use the fetch API for more complex use cases.
 
-## Examples/ API
+## Examples
 
 ```js
 var simpleFetch = require('simple-fetch');
@@ -23,3 +23,12 @@ postJson('http://myapi.com/events', {
 		console.log(response);
 	});
 ```
+
+## API
+
+### `getJson(url)`
+### `postJson(url, data)`
+### `putJson(url, data)`
+### `patchJson(url, data)`
+
+`data` can be an object, array or JSON string
