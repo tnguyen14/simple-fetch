@@ -35,5 +35,5 @@ module.exports = {
 	getJson: getJson,
 	postJson: createJsonMethod('post'),
 	putJson: createJsonMethod('put'),
-	patchJson: createJsonMethod('patch')
+	patchJson: createJsonMethod('PATCH')
 };
