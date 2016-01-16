@@ -33,7 +33,7 @@ function createJsonMethod (method) {
 
 module.exports = {
 	getJson: getJson,
-	postJson: createJsonMethod('post'),
-	putJson: createJsonMethod('put'),
+	postJson: createJsonMethod('POST'),
+	putJson: createJsonMethod('PUT'),
 	patchJson: createJsonMethod('PATCH')
 };
