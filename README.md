@@ -30,5 +30,6 @@ postJson('http://myapi.com/events', {
 ### `postJson(url, data)`
 ### `putJson(url, data)`
 ### `patchJson(url, data)`
+### `deleteJson(url)`
 
 `data` can be an object, array or JSON string

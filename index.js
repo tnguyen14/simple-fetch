@@ -11,6 +11,12 @@ function getJson (url) {
 	return fetch(url).then(parseJSON);
 }
 
+function deleteJson (url) {
+	return fetch(url, {
+		method: 'DELETE'
+	}).then(parseJSON);
+}
+
 function createJsonMethod (method) {
 	return function (url, data) {
 		var json = data;
@@ -35,5 +41,6 @@ module.exports = {
 	getJson: getJson,
 	postJson: createJsonMethod('POST'),
 	putJson: createJsonMethod('PUT'),
-	patchJson: createJsonMethod('PATCH')
+	patchJson: createJsonMethod('PATCH'),
+	deleteJson: deleteJson
 };
