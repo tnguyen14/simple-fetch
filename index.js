@@ -1,20 +1,36 @@
 'use strict';
 
+/* global fetch */
+
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+
+function checkStatus (response) {
+	if (response.status >= 200 && response.status < 300) {
+		return response;
+	} else {
+		var error = new Error(response.statusText);
+		error.response = response;
+		throw error;
+	}
+}
 
 function parseJSON (response) {
 	return response.json();
 }
 
 function getJson (url) {
-	return fetch(url).then(parseJSON);
+	return fetch(url)
+		.then(checkStatus)
+		.then(parseJSON);
 }
 
 function deleteJson (url) {
 	return fetch(url, {
 		method: 'DELETE'
-	}).then(parseJSON);
+	})
+		.then(checkStatus)
+		.then(parseJSON);
 }
 
 function createJsonMethod (method) {
@@ -33,7 +49,9 @@ function createJsonMethod (method) {
 				'Content-Type': 'application/json'
 			},
 			body: json
-		}).then(parseJSON);
+		})
+			.then(checkStatus)
+			.then(parseJSON);
 	};
 }
 
