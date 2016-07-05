@@ -5,6 +5,11 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
+var headers = {
+	'Accept': 'application/json',
+	'Content-Type': 'application/json'	
+};
+
 function checkStatus (response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;
@@ -20,14 +25,17 @@ function parseJSON (response) {
 }
 
 function getJson (url) {
-	return fetch(url)
+	return fetch(url, {
+		headers: headers
+	})
 		.then(checkStatus)
 		.then(parseJSON);
 }
 
 function deleteJson (url) {
 	return fetch(url, {
-		method: 'DELETE'
+		method: 'DELETE',
+		headers: headers
 	})
 		.then(checkStatus)
 		.then(parseJSON);
@@ -44,10 +52,7 @@ function createJsonMethod (method) {
 
 		return fetch(url, {
 			method: method,
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
+			headers: headers,
 			body: json
 		})
 			.then(checkStatus)
