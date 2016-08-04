@@ -7,7 +7,7 @@ require('isomorphic-fetch');
 
 var headers = {
 	'Accept': 'application/json',
-	'Content-Type': 'application/json'	
+	'Content-Type': 'application/json'
 };
 
 function checkStatus (response) {
@@ -24,25 +24,27 @@ function parseJSON (response) {
 	return response.json();
 }
 
-function getJson (url) {
-	return fetch(url, {
-		headers: headers
-	})
+function getJson (url, opts) {
+	return fetch(url, Object.assign({
+		headers: {
+			'Accept': 'application/json'
+		}
+	}, opts))
 		.then(checkStatus)
 		.then(parseJSON);
 }
 
-function deleteJson (url) {
-	return fetch(url, {
+function deleteJson (url, opts) {
+	return fetch(url, Object.assign({
 		method: 'DELETE',
 		headers: headers
-	})
+	}, opts))
 		.then(checkStatus)
 		.then(parseJSON);
 }
 
 function createJsonMethod (method) {
-	return function (url, data) {
+	return function (url, data, opts) {
 		var json = data;
 		if (typeof data === 'object') {
 			json = JSON.stringify(data);
@@ -50,11 +52,11 @@ function createJsonMethod (method) {
 			throw new Error('Data must be an object or a JSON string.');
 		}
 
-		return fetch(url, {
+		return fetch(url, Object.assign({
 			method: method,
 			headers: headers,
 			body: json
-		})
+		}, opts))
 			.then(checkStatus)
 			.then(parseJSON);
 	};

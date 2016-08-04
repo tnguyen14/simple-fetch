@@ -26,10 +26,10 @@ postJson('http://myapi.com/events', {
 
 ## API
 
-### `getJson(url)`
-### `postJson(url, data)`
-### `putJson(url, data)`
-### `patchJson(url, data)`
-### `deleteJson(url)`
+### `getJson(url, opts)`
+### `postJson(url, data, opts)`
+### `putJson(url, data, opts)`
+### `patchJson(url, data, opts)`
+### `deleteJson(url, opts)`
 
 `data` can be an object, array or JSON string
