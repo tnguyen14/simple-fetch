@@ -34,6 +34,7 @@ postJson('http://myapi.com/events', {
 ### `patchJson(url, data, opts)`
 ### `deleteJson(url, opts)`
 
-`data` can be an object, array or JSON string
-`opts.only2xx`: if set to `false`, will not throw error even for error codes other than 2xx. Defaults to `true`.
-`opts.skipParsing`: skip parsing of response into JSON, will return the `Response` object directly. Defaults to `false`.
+### Parameters
+- `data` can be an object, array or JSON string
+- `opts.only2xx`: if set to `false`, will not throw error even for error codes other than 2xx. Defaults to `true`.
+- `opts.skipParsing`: skip parsing of response into JSON, will return the `Response` object directly. Defaults to `false`.
