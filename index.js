@@ -4,6 +4,7 @@
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+var merge = require('lodash.merge');
 
 function checkStatus (response) {
 	if (response.status >= 200 && response.status < 300) {
@@ -51,7 +52,7 @@ function createJsonMethod (method, sendData) {
 			skipParsing = true;
 		}
 
-		return fetch(url, Object.assign(options, opts))
+		return fetch(url, merge({}, options, opts))
 			.then(function (response) {
 				if (!only2xx) {
 					return response;

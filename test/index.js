@@ -119,5 +119,20 @@ tap.test('simple-fetch', function (t) {
 				t.end();
 			});
 	});
+	t.test('additional headers', function (t) {
+		simpleFetch.getJson(server.url + '/inspect', {
+			headers: {
+				'x-custom-header': 'asdfgc'
+			}
+		})
+			.then(function (res) {
+				t.equal(res.headers['x-custom-header'], 'asdfgc');
+				t.end();
+			}, function (err) {
+				t.notOk(err);
+				console.log(err);
+				t.end();
+			});
+	});
 	t.end();
 });
