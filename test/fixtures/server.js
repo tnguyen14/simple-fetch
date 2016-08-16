@@ -34,4 +34,11 @@ server.del('/posts/:id', function (req, res, next) {
 	return next();
 });
 
+server.get('/4xx', function (req, res, next) {
+	res.send(400, {
+		status: 'OK'
+	});
+	return next();
+});
+
 module.exports = server;

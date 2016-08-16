@@ -3,6 +3,8 @@
 
 This is only meant for more convenient basic JSON requests. Please use the fetch API for more complex use cases.
 
+By default, HTTP response codes other than 2xx will cause the fetch promise handler to throw. To change this behavior, set `opts.only2xx = false`.
+
 ## Examples
 
 ```js
@@ -33,3 +35,4 @@ postJson('http://myapi.com/events', {
 ### `deleteJson(url, opts)`
 
 `data` can be an object, array or JSON string
+`opts.only2xx`: if set to `false`, will not throw error even for error codes other than 2xx. Default to `true`.

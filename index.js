@@ -10,7 +10,10 @@ var headers = {
 	'Content-Type': 'application/json'
 };
 
-function checkStatus (response) {
+function checkStatus (only2xx, response) {
+	if (!only2xx) {
+		return response;
+	}
 	if (response.status >= 200 && response.status < 300) {
 		return response;
 	} else {
@@ -25,26 +28,40 @@ function parseJSON (response) {
 }
 
 function getJson (url, opts) {
+	var only2xx = true;
+	if (opts && opts.only2xx === false) {
+		only2xx = false;
+	}
 	return fetch(url, Object.assign({
 		headers: {
 			'Accept': 'application/json'
 		}
 	}, opts))
-		.then(checkStatus)
+		.then(checkStatus.bind(global, only2xx))
 		.then(parseJSON);
 }
 
 function deleteJson (url, opts) {
+	var only2xx = true;
+	if (opts && opts.only2xx === false) {
+		only2xx = false;
+	}
 	return fetch(url, Object.assign({
 		method: 'DELETE',
-		headers: headers
+		headers: {
+			'Accept': 'application/json'
+		}
 	}, opts))
-		.then(checkStatus)
+		.then(checkStatus.bind(global, only2xx))
 		.then(parseJSON);
 }
 
 function createJsonMethod (method) {
 	return function (url, data, opts) {
+		var only2xx = true;
+		if (opts && opts.only2xx === false) {
+			only2xx = false;
+		}
 		var json = data;
 		if (typeof data === 'object') {
 			json = JSON.stringify(data);
@@ -57,7 +74,7 @@ function createJsonMethod (method) {
 			headers: headers,
 			body: json
 		}, opts))
-			.then(checkStatus)
+			.then(checkStatus.bind(global, only2xx))
 			.then(parseJSON);
 	};
 }

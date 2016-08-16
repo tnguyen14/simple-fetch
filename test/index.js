@@ -82,5 +82,28 @@ tap.test('simple-fetch', function (t) {
 				t.end();
 			});
 	});
+	t.test('4xx', function (t) {
+		simpleFetch.getJson(server.url + '/4xx')
+			.then(function (resp) {
+				t.end();
+			}, function (err) {
+				t.ok(err, 'should throw an error');
+				t.end();
+			});
+	});
+	t.test('4xx not simple', function (t) {
+		simpleFetch.getJson(server.url + '/4xx', {
+			only2xx: false
+		})
+			.then(function (resp) {
+				t.same(resp, {
+					status: 'OK'
+				});
+				t.end();
+			}, function (err) {
+				t.notOk(err);
+				t.end();
+			});
+	});
 	t.end();
 });
