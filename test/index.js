@@ -101,7 +101,21 @@ tap.test('simple-fetch', function (t) {
 				});
 				t.end();
 			}, function (err) {
+				console.log(err);
 				t.notOk(err);
+				t.end();
+			});
+	});
+	t.test('skip parsing', function (t) {
+		simpleFetch.postJson(server.url + '/posts', {
+			id: '1',
+			content: 'Baz'
+		}, {
+			skipParsing: true
+		})
+			.then(function (resp) {
+				/* global Response */
+				t.ok(resp instanceof Response, 'Response object is returned');
 				t.end();
 			});
 	});

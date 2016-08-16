@@ -5,10 +5,7 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-function checkStatus (only2xx, response) {
-	if (!only2xx) {
-		return response;
-	}
+function checkStatus (response) {
 	if (response.status >= 200 && response.status < 300) {
 		return response;
 	} else {
@@ -34,6 +31,7 @@ function createJsonMethod (method, sendData) {
 		headers: headers
 	};
 	var only2xx = true;
+	var skipParsing = false;
 	return function (url, data, opts) {
 		if (sendData) {
 			var json = data;
@@ -49,10 +47,23 @@ function createJsonMethod (method, sendData) {
 		if (opts && opts.only2xx === false) {
 			only2xx = false;
 		}
+		if (opts && opts.skipParsing === true) {
+			skipParsing = true;
+		}
 
 		return fetch(url, Object.assign(options, opts))
-			.then(checkStatus.bind(global, only2xx))
-			.then(parseJSON);
+			.then(function (response) {
+				if (!only2xx) {
+					return response;
+				}
+				return checkStatus(response);
+			})
+			.then(function (response) {
+				if (skipParsing) {
+					return response;
+				}
+				return parseJSON(response);
+			});
 	};
 }
 
