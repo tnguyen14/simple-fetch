@@ -31,9 +31,9 @@ function createJsonMethod (method, sendData) {
 		method: method,
 		headers: headers
 	};
-	var only2xx = true;
-	var skipParsing = false;
 	return function (url, data, opts) {
+		var only2xx = true;
+		var skipParsing = false;
 		if (sendData) {
 			var json = data;
 			if (typeof data === 'object') {

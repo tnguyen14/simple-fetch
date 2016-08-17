@@ -2,7 +2,7 @@ var simpleFetch = require('../');
 var tap = require('tap');
 var server = require('./fixtures/server');
 
-var SERVER_PORT = 4003;
+var SERVER_PORT = 4033;
 
 tap.test('simple-fetch', function (t) {
 	t.beforeEach(function (done) {
