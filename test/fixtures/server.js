@@ -50,4 +50,13 @@ server.get('/inspect', function (req, res, next) {
 	return next();
 });
 
+server.post('/inspect', function (req, res, next) {
+	res.send({
+		method: req.method,
+		url: req.url,
+		headers: req.headers
+	});
+	return next();
+});
+
 module.exports = server;

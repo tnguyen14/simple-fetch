@@ -24,6 +24,19 @@ tap.test('simple-fetch', function (t) {
 				t.end();
 			});
 	});
+	t.test('getJson - with headers', function (t) {
+		simpleFetch('get', server.url + '/inspect', {
+			headers: {
+				Authorization: 'Bearer asdfghjkl'
+			}
+		}).then(function (req) {
+			t.equal(req.headers.authorization, 'Bearer asdfghjkl');
+			t.end();
+		}, function (err) {
+			t.notOk(err);
+			t.end();
+		});
+	});
 	t.test('getJson - convenient method', function (t) {
 		simpleFetch.getJson(server.url + '/posts')
 			.then(function (posts) {
@@ -53,6 +66,19 @@ tap.test('simple-fetch', function (t) {
 				t.notOk(err);
 				t.end();
 			});
+	});
+	t.test('postJson - with headers', function (t) {
+		simpleFetch('post', server.url + '/inspect', {}, {
+			headers: {
+				Authorization: 'Bearer asdfghjkl'
+			}
+		}).then(function (req) {
+			t.equal(req.headers.authorization, 'Bearer asdfghjkl');
+			t.end();
+		}, function (err) {
+			t.notOk(err);
+			t.end();
+		});
 	});
 	t.test('postJson - convenient method', function (t) {
 		simpleFetch.postJson(server.url + '/posts', {
