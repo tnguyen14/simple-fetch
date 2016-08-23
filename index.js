@@ -20,10 +20,14 @@ function parseJSON (response) {
 	return response.json();
 }
 
-function createJsonMethod (method, sendData) {
+function createJsonMethod (method) {
 	var headers = {
 		'Accept': 'application/json'
 	};
+	var sendData = false;
+	if (['post', 'patch', 'put'].indexOf(method.toLowerCase()) !== -1) {
+		sendData = true;
+	}
 	if (sendData) {
 		headers['Content-Type'] = 'application/json';
 	}
@@ -68,10 +72,12 @@ function createJsonMethod (method, sendData) {
 	};
 }
 
-module.exports = {
-	getJson: createJsonMethod('GET'),
-	postJson: createJsonMethod('POST', true),
-	putJson: createJsonMethod('PUT', true),
-	patchJson: createJsonMethod('PATCH', true),
-	deleteJson: createJsonMethod('DELETE')
+module.exports = function simpleFetch (method, url, data, opts) {
+	return createJsonMethod(method)(url, data, opts);
 };
+
+module.exports.getJson = createJsonMethod('GET');
+module.exports.postJson = createJsonMethod('POST');
+module.exports.putJson = createJsonMethod('PUT');
+module.exports.patchJson = createJsonMethod('PATCH');
+module.exports.deleteJson = createJsonMethod('DELETE');

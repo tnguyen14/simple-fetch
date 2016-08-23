@@ -20,19 +20,24 @@ getJson('http://myapi.com/events')
 postJson('http://myapi.com/events', {
 	name: 'New Event',
 	date: 'tomorrow'
-})
-	.then(function (response) {
+}).then(function (response) {
 		console.log(response);
 	});
+
+simpleFetch('patch', 'http://myapi.com/events/1', {
+	name: 'Other Event',
+	date: 'next Sunday'
+}).then(...)
 ```
 
 ## API
 
-### `getJson(url, opts)`
-### `postJson(url, data, opts)`
-### `putJson(url, data, opts)`
-### `patchJson(url, data, opts)`
-### `deleteJson(url, opts)`
+### `simpleFetch(method, url[, data][, opts])`
+### `.getJson(url[, opts])`
+### `.postJson(url, data[, opts])`
+### `.putJson(url, data[, opts])`
+### `.patchJson(url, data[, opts])`
+### `.deleteJson(url[, opts])`
 
 ### Parameters
 - `data` can be an object, array or JSON string
