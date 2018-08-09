@@ -37,6 +37,19 @@ tap.test('simple-fetch', function (t) {
 			t.end();
 		});
 	});
+	t.test('getJson - with opts and null data', function (t) {
+		simpleFetch('get', server.url + '/inspect', null, {
+			headers: {
+				Authorization: 'Bearer asdfghjkl'
+			}
+		}).then(function (req) {
+			t.equal(req.headers.authorization, 'Bearer asdfghjkl');
+			t.end();
+		}, function (err) {
+			t.notOk(err);
+			t.end();
+		});
+	});
 	t.test('getJson - convenient method', function (t) {
 		simpleFetch.getJson(server.url + '/posts')
 			.then(function (posts) {

@@ -47,7 +47,10 @@ function createJsonMethod (method) {
 			}
 			options.body = json;
 		} else {
-			opts = data;
+			// for get and delete, enable opts to be set if data is skipped
+			if (data && !opts) {
+				opts = data;
+			}
 		}
 		if (opts && opts.only2xx === false) {
 			only2xx = false;
