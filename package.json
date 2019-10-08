@@ -1,6 +1,6 @@
 {
   "name": "simple-fetch",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "Simple and minimal wrapper around fetch API for JSON requests",
   "main": "index.js",
   "repository": "tnguyen14/simple-fetch",
