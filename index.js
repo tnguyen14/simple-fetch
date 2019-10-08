@@ -1,10 +1,7 @@
 'use strict';
 
-/* global fetch */
-
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
-var merge = require('lodash.merge');
+const fetch = require('cross-fetch');
+const merge = require('lodash.merge');
 
 function checkStatus (response) {
 	if (response.status >= 200 && response.status < 300) {

@@ -4,7 +4,7 @@ var server = restify.createServer({
 	name: 'simple-fetch-test-server'
 });
 
-server.use(restify.bodyParser());
+server.use(restify.plugins.bodyParser());
 
 server.get('/posts', function (req, res, next) {
 	res.send([{
@@ -15,22 +15,31 @@ server.get('/posts', function (req, res, next) {
 });
 
 server.post('/posts', function (req, res, next) {
-	res.send(req.params);
+	res.send(req.body);
 	return next();
 });
 
 server.put('/posts/:id', function (req, res, next) {
-	res.send(req.params);
+	res.send({
+		...req.body,
+		id: req.params.id
+	});
 	return next();
 });
 
 server.patch('/posts/:id', function (req, res, next) {
-	res.send(req.params);
+	res.send({
+		...req.body,
+		id: req.params.id
+	});
 	return next();
 });
 
 server.del('/posts/:id', function (req, res, next) {
-	res.send(req.params);
+	res.send({
+		...req.body,
+		id: req.params.id
+	});
 	return next();
 });
 

@@ -1,8 +1,9 @@
-var simpleFetch = require('../');
-var tap = require('tap');
-var server = require('./fixtures/server');
+const simpleFetch = require('../');
+const tap = require('tap');
+const server = require('./fixtures/server');
+const Response = require('cross-fetch').Response;
 
-var SERVER_PORT = 4033;
+const SERVER_PORT = 4033;
 
 tap.test('simple-fetch', function (t) {
 	t.beforeEach(function (done) {
@@ -229,7 +230,6 @@ tap.test('simple-fetch', function (t) {
 			skipParsing: true
 		})
 			.then(function (resp) {
-				/* global Response */
 				t.ok(resp instanceof Response, 'Response object is returned');
 				t.end();
 			});
