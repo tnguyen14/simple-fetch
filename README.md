@@ -8,21 +8,22 @@ By default, HTTP response codes other than 2xx will cause the fetch promise hand
 ## Examples
 
 ```js
-var simpleFetch = require('simple-fetch');
-var getJson = simpleFetch.getJson;
-var postJson = simpleFetch.postJson;
+const simpleFetch = require('simple-fetch');
+const { getJson, postJson } = simpleFetch;
 
 getJson('http://myapi.com/events')
-	.then(function (events) {
-		console.log(events);
-	});
+  .then(function (events) {
+    console.log(events);
+  });
 
-postJson('http://myapi.com/events', {
-	name: 'New Event',
-	date: 'tomorrow'
-}).then(function (response) {
-		console.log(response);
-	});
+const response = await postJson('http://myapi.com/events', {
+  name: 'New Event',
+  date: 'tomorrow'
+}, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
 
 simpleFetch('patch', 'http://myapi.com/events/1', {
 	name: 'Other Event',
@@ -32,12 +33,12 @@ simpleFetch('patch', 'http://myapi.com/events/1', {
 
 ## API
 
-### `simpleFetch(method, url[, data][, opts])`
-### `.getJson(url[, opts])`
-### `.postJson(url, data[, opts])`
-### `.putJson(url, data[, opts])`
-### `.patchJson(url, data[, opts])`
-### `.deleteJson(url[, opts])`
+- `simpleFetch(method, url[, data][, opts])`
+- `.getJson(url[, opts])`
+- `.postJson(url, data[, opts])`
+- `.putJson(url, data[, opts])`
+- `.patchJson(url, data[, opts])`
+- `.deleteJson(url[, opts])`
 
 ### Parameters
 - `data` can be an object, array or JSON string
