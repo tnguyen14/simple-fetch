@@ -26,8 +26,8 @@ const response = await postJson('http://myapi.com/events', {
 });
 
 simpleFetch('patch', 'http://myapi.com/events/1', {
-	name: 'Other Event',
-	date: 'next Sunday'
+  name: 'Other Event',
+  date: 'next Sunday'
 }).then(...)
 ```
 
