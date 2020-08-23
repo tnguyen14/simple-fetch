@@ -249,5 +249,22 @@ tap.test('simple-fetch', function (t) {
 				t.end();
 			});
 	});
+
+	t.test('create fetch instance', function (t) {
+		const fetch = simpleFetch.createFetch({
+			headers: {
+				Authorization: 'Bearer asdfghjkl'
+			}
+		});
+		fetch.getJson(`${server.url}/inspect`)
+			.then(function (req) {
+				t.equal(req.headers.authorization, 'Bearer asdfghjkl');
+				t.end();
+			}, function (err) {
+				t.notOk(err);
+				t.end();
+			});
+	});
+
 	t.end();
 });

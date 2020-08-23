@@ -11,12 +11,12 @@ By default, HTTP response codes other than 2xx will cause the fetch promise hand
 const simpleFetch = require('simple-fetch');
 const { getJson, postJson } = simpleFetch;
 
-getJson('http://myapi.com/events')
+getJson('https://myapi.com/events')
   .then(function (events) {
     console.log(events);
   });
 
-const response = await postJson('http://myapi.com/events', {
+const response = await postJson('https://myapi.com/events', {
   name: 'New Event',
   date: 'tomorrow'
 }, {
@@ -25,10 +25,25 @@ const response = await postJson('http://myapi.com/events', {
   }
 });
 
-simpleFetch('patch', 'http://myapi.com/events/1', {
+simpleFetch('patch', 'https://myapi.com/events/1', {
   name: 'Other Event',
   date: 'next Sunday'
 }).then(...)
+```
+
+If common options, such as headers, need to be passed to all methods, use `createFetch`:
+
+```js
+const { createFetch } = require('simple-fetch');
+const { getJson, deleteJson } = createFetch({
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+
+await getJson('https://myauthenticatedapi.com/events');
+await deleteJson('https://myauthenticatedapi.com/events/2');
+
 ```
 
 ## API

@@ -17,7 +17,7 @@ function parseJSON (response) {
 	return response.json();
 }
 
-function createJsonMethod (method) {
+function createJsonMethod (method, defaultOpts) {
 	var headers = {
 		'Accept': 'application/json'
 	};
@@ -28,10 +28,10 @@ function createJsonMethod (method) {
 	if (sendData) {
 		headers['Content-Type'] = 'application/json';
 	}
-	var options = {
+	var options = merge({
 		method: method,
 		headers: headers
-	};
+	}, defaultOpts);
 	return function (url, data, opts) {
 		var only2xx = true;
 		var skipParsing = false;
@@ -72,12 +72,18 @@ function createJsonMethod (method) {
 	};
 }
 
-module.exports = function simpleFetch (method, url, data, opts) {
-	return createJsonMethod(method)(url, data, opts);
-};
+function createFetch(defaultOpts) {
+	const fetchInstance = function simpleFetch(method, url, data, opts) {
+		return createJsonMethod(method, defaultOpts)(url, data, opts);
+	}
+	fetchInstance.getJson = createJsonMethod('GET', defaultOpts);
+	fetchInstance.postJson = createJsonMethod('POST', defaultOpts);
+	fetchInstance.putJson = createJsonMethod('PUT', defaultOpts);
+	fetchInstance.patchJson = createJsonMethod('PATCH', defaultOpts);
+	fetchInstance.deleteJson = createJsonMethod('DELETE', defaultOpts);
 
-module.exports.getJson = createJsonMethod('GET');
-module.exports.postJson = createJsonMethod('POST');
-module.exports.putJson = createJsonMethod('PUT');
-module.exports.patchJson = createJsonMethod('PATCH');
-module.exports.deleteJson = createJsonMethod('DELETE');
+	return fetchInstance;
+}
+
+module.exports = createFetch();
+module.exports.createFetch = createFetch;
