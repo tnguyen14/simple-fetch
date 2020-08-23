@@ -13,7 +13,7 @@ tap.test('simple-fetch', function (t) {
 		server.close(done);
 	});
 	t.test('getJson', function (t) {
-		simpleFetch('get', server.url + '/posts')
+		simpleFetch('get', `${server.url}/posts`)
 			.then(function (posts) {
 				t.same(posts, [{
 					id: '1',
@@ -26,7 +26,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('getJson - with headers', function (t) {
-		simpleFetch('get', server.url + '/inspect', {
+		simpleFetch('get', `${server.url}/inspect`, {
 			headers: {
 				Authorization: 'Bearer asdfghjkl'
 			}
@@ -39,7 +39,7 @@ tap.test('simple-fetch', function (t) {
 		});
 	});
 	t.test('getJson - with opts and null data', function (t) {
-		simpleFetch('get', server.url + '/inspect', null, {
+		simpleFetch('get', `${server.url}/inspect`, null, {
 			headers: {
 				Authorization: 'Bearer asdfghjkl'
 			}
@@ -52,7 +52,7 @@ tap.test('simple-fetch', function (t) {
 		});
 	});
 	t.test('getJson - convenient method', function (t) {
-		simpleFetch.getJson(server.url + '/posts')
+		simpleFetch.getJson(`${server.url}/posts`)
 			.then(function (posts) {
 				t.same(posts, [{
 					id: '1',
@@ -66,7 +66,7 @@ tap.test('simple-fetch', function (t) {
 	});
 
 	t.test('postJson', function (t) {
-		simpleFetch('post', server.url + '/posts', {
+		simpleFetch('post', `${server.url}/posts`, {
 			id: '1',
 			content: 'Test'
 		})
@@ -82,7 +82,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('postJson - with headers', function (t) {
-		simpleFetch('post', server.url + '/inspect', {}, {
+		simpleFetch('post', `${server.url}/inspect`, {}, {
 			headers: {
 				Authorization: 'Bearer asdfghjkl'
 			}
@@ -95,7 +95,7 @@ tap.test('simple-fetch', function (t) {
 		});
 	});
 	t.test('postJson - convenient method', function (t) {
-		simpleFetch.postJson(server.url + '/posts', {
+		simpleFetch.postJson(`${server.url}/posts`, {
 			id: '1',
 			content: 'Test'
 		})
@@ -112,7 +112,7 @@ tap.test('simple-fetch', function (t) {
 	});
 
 	t.test('putJson', function (t) {
-		simpleFetch('put', server.url + '/posts/1', {
+		simpleFetch('put', `${server.url}/posts/1`, {
 			content: 'Foo'
 		})
 			.then(function (resp) {
@@ -127,7 +127,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('putJson - convenient method', function (t) {
-		simpleFetch.putJson(server.url + '/posts/1', {
+		simpleFetch.putJson(`${server.url}/posts/1`, {
 			content: 'Foo'
 		})
 			.then(function (resp) {
@@ -143,7 +143,7 @@ tap.test('simple-fetch', function (t) {
 	});
 
 	t.test('patchJson', function (t) {
-		simpleFetch('patch', server.url + '/posts/1', {
+		simpleFetch('patch', `${server.url}/posts/1`, {
 			content: 'Bar'
 		})
 			.then(function (resp) {
@@ -158,7 +158,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('patchJson - convenient method', function (t) {
-		simpleFetch.patchJson(server.url + '/posts/1', {
+		simpleFetch.patchJson(`${server.url}/posts/1`, {
 			content: 'Bar'
 		})
 			.then(function (resp) {
@@ -174,7 +174,7 @@ tap.test('simple-fetch', function (t) {
 	});
 
 	t.test('deleteJson', function (t) {
-		simpleFetch('delete', server.url + '/posts/1')
+		simpleFetch('delete', `${server.url}/posts/1`)
 			.then(function (resp) {
 				t.same(resp, {
 					id: '1'
@@ -186,7 +186,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('deleteJson - convenient method', function (t) {
-		simpleFetch.deleteJson(server.url + '/posts/1')
+		simpleFetch.deleteJson(`${server.url}/posts/1`)
 			.then(function (resp) {
 				t.same(resp, {
 					id: '1'
@@ -199,7 +199,7 @@ tap.test('simple-fetch', function (t) {
 	});
 
 	t.test('4xx', function (t) {
-		simpleFetch('get', server.url + '/4xx')
+		simpleFetch('get', `${server.url}/4xx`)
 			.then(function (resp) {
 				t.end();
 			}, function (err) {
@@ -208,7 +208,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('4xx not simple', function (t) {
-		simpleFetch('get', server.url + '/4xx', {
+		simpleFetch('get', `${server.url}/4xx`, {
 			only2xx: false
 		})
 			.then(function (resp) {
@@ -223,7 +223,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('skip parsing', function (t) {
-		simpleFetch('post', server.url + '/posts', {
+		simpleFetch('post', `${server.url}/posts`, {
 			id: '1',
 			content: 'Baz'
 		}, {
@@ -235,7 +235,7 @@ tap.test('simple-fetch', function (t) {
 			});
 	});
 	t.test('additional headers', function (t) {
-		simpleFetch('get', server.url + '/inspect', {
+		simpleFetch('get', `${server.url}/inspect`, {
 			headers: {
 				'x-custom-header': 'asdfgc'
 			}
