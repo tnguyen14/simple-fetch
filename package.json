@@ -1,6 +1,6 @@
 {
   "name": "simple-fetch",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Simple and minimal wrapper around fetch API for JSON requests",
   "main": "index.js",
   "module": "dist/index.js",
