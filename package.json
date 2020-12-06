@@ -19,12 +19,12 @@
   "author": "Tri Nguyen <tri@tridnguyen.com>",
   "license": "ISC",
   "dependencies": {
-    "cross-fetch": "^3.0.4",
+    "cross-fetch": "^3.0.6",
     "es6-promise": "^3.0.2",
     "lodash.merge": "^4.6.2"
   },
   "devDependencies": {
-    "restify": "^8.4.0",
+    "restify": "^8.5.1",
     "tap": "^14.10.8"
   }
 }
