@@ -13,6 +13,7 @@
     "test": "tap test/*.js --reporter spec",
     "prepublishOnly": "npx rollup index.js -f es -d dist"
   },
+  "files": ["index.js", "dist/index.js"],
   "keywords": [
     "fetch"
   ],
