@@ -1,6 +1,6 @@
 {
   "name": "simple-fetch",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Simple and minimal wrapper around fetch API for JSON requests",
   "main": "index.js",
   "module": "dist/index.js",
@@ -13,7 +13,10 @@
     "test": "tap test/*.js --reporter spec",
     "prepublishOnly": "npx rollup index.js -f es -d dist"
   },
-  "files": ["index.js", "dist/index.js"],
+  "files": [
+    "index.js",
+    "dist/index.js"
+  ],
   "keywords": [
     "fetch"
   ],
