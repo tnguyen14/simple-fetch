@@ -1,5 +1,5 @@
 # simple-fetch
-> a simple wrapper around [isomorphic-fetch](matthew-andrews/isomorphic-fetch) to make it easier to work with common [fetch](github/fetch) tasks
+> a simple wrapper around [cross-fetch](https://github.com/lquixada/cross-fetch) to make it easier to work with common [fetch](github/fetch) tasks
 
 This is only meant for more convenient basic JSON requests. Please use the fetch API for more complex use cases.
 
